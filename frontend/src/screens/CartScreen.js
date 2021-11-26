@@ -6,15 +6,25 @@ import { Link } from "react-router-dom";
 import CartItems from "../components/CartItems";
 
 //actions
-import { addToCart } from "../components/redux/actions/cartActions";
+import { addToCart,removeFromCart } from "../components/redux/actions/cartActions";
 
 const CartScreen = () => {
+
   const dispatch = useDispatch();
-  const cart = useSelector(state => state.cart);
-  const {cartItems} = cart;
+  const cart = useSelector((state) => state.cart)
+  const { cartItems } = cart
   const qtyChangeHandler= (id, qty) => {
     dispatch(addToCart(id, qty))
   }
+  const removeFromCartHandler = (id) => {
+    dispatch(removeFromCart(id))
+  }
+   const getCartCount = () => {
+     return cartItems.reduce((qty,item) => Number(item.qty) + qty, 0)
+   };
+   const getCartSubtotal = () => {
+     return cartItems.reduce((price, item) => item.price * item.qty + price, 0)
+   }
   return (
     <div className='cartscreen'>
       <div className='cartscreen__left'>
@@ -29,15 +39,15 @@ const CartScreen = () => {
               key={item.product}
               item={item}
               qtyChangeHandler={qtyChangeHandler}
-              // removeHandler={removeFromCartHandler}
+              removeHandler={removeFromCartHandler}
             />
           ))
         )}
       </div>
       <div className='cartscreen__right'>
         <div className='cartscreen__info'>
-          <p>Tổng tộng (0) sản phẩm</p>
-          <p> 499</p>
+          <p>Tổng tộng {getCartCount()} sản phẩm</p>
+          <p> $ {getCartSubtotal().toFixed(2)}</p>
         </div>
         <div>
           <button>Thanh toán</button>
