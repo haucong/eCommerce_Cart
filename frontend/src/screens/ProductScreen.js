@@ -10,8 +10,8 @@ const ProductScreen = ({ match, history }) => {
   const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
 
-  const ProductDetails = useSelector((state) => state.getProductsDetails);
-  const { loading, error, product } = ProductDetails;
+  const productDetails = useSelector((state) => state.getProductsDetails);
+  const { loading, error, product } = productDetails
 
   useEffect(() => {
     if (product && match.params.id !== product._id) {
@@ -38,7 +38,7 @@ const ProductScreen = ({ match, history }) => {
             </div>
             <div className='left__info'>
               <p className='left__name'>{product.name}</p>
-              <p>{product.price} vnd</p>
+              <p> $ {product.price} </p>
               <p> Mô tả: {product.description}</p>
             </div>
           </div>

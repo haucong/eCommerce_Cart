@@ -24,7 +24,7 @@ const Navbar = ({ click }) => {
             <i className="fas fa-shopping-cart"></i>
             <span>
               Giỏ hàng
-              <span className="cartlogo__badge">{getCartCount}</span>
+              <span className="cartlogo__badge">{getCartCount()} </span>
             </span>
           </Link>
         </li>
