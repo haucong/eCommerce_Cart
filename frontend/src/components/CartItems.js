@@ -30,6 +30,6 @@ const CartItems = ({ item, qtyChangeHandler, removeHandler }) => {
       </button>
     </div>
   )
-};
+}
 
 export default CartItems;
